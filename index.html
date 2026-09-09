@@ -24,6 +24,8 @@
   --ff: 'Barlow', sans-serif;
   --ffc: 'Barlow Condensed', sans-serif;
   --serif: 'Cormorant Garamond', serif;
+  --max-width: 1340px;
+  --side-pad: clamp(60px, 6vw, 100px);
 }
 html { scroll-behavior: smooth; }
 body { font-family: var(--ff); color: var(--text); background: var(--white); overflow-x: hidden; }
@@ -49,7 +51,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: rgba(17,27,39,0.96); backdrop-filter: blur(12px);
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 5%; height: 72px;
+  padding: 0 var(--side-pad); height: 72px;
   border-bottom: 1px solid rgba(85,128,145,0.15);
 }
 .nav-logo { display: flex; align-items: center; }
@@ -98,7 +100,8 @@ nav {
 }
 .hero-content {
   position: relative; z-index: 3;
-  padding: 140px 5% 100px; width: 58%;
+  padding: 140px var(--side-pad) 100px;
+  width: 58%; max-width: calc(var(--max-width) * 0.58);
 }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
@@ -138,6 +141,7 @@ h1 em { color: var(--accent-light); font-style: normal; }
 .hero-stats {
   display: flex; gap: 56px; margin-top: 80px; padding-top: 48px;
   border-top: 1px solid rgba(85,128,145,0.2);
+  max-width: 680px;
 }
 .stat .num {
   font-family: var(--ffc); font-size: 40px; font-weight: 800;
@@ -147,7 +151,14 @@ h1 em { color: var(--accent-light); font-style: normal; }
 .stat .lbl { font-size: 11px; color: var(--gray-500); letter-spacing: 1px; text-transform: uppercase; line-height: 1.5; }
 
 /* SEÇÃO PADRÃO */
-.section { padding: 104px 5%; }
+.section {
+  padding: 104px var(--side-pad);
+}
+.section-wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+}
 .section-label {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
@@ -164,6 +175,7 @@ h2 {
 .diff-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1px; background: var(--gray-100); border: 1px solid var(--gray-100);
+  max-width: var(--max-width); margin: 0 auto;
 }
 .diff-card { background: var(--white); padding: 44px 36px; transition: background 0.2s; }
 .diff-card:hover { background: #FAFAF8; }
@@ -174,10 +186,15 @@ h2 {
 
 /* SERVIÇOS */
 .services-bg { background: var(--navy); }
+.services-bg .section { padding: 104px var(--side-pad); }
 .services-bg .section-label { color: var(--accent); }
 .services-bg h2 { color: var(--white); }
 .services-bg .section-desc { color: rgba(255,255,255,0.5); }
-.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06);
+  max-width: var(--max-width); margin: 0 auto;
+}
 .service-card {
   background: var(--navy-mid); padding: 36px 28px;
   border-bottom: 2px solid transparent; transition: all 0.25s;
@@ -188,15 +205,18 @@ h2 {
 .service-card p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; }
 
 /* BIM */
-.bim-wrap { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; }
-.bim-content { background: var(--navy); padding: 96px 5%; display: flex; flex-direction: column; justify-content: center; }
+.bim-wrap { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; width: 100%; }
+.bim-content {
+  background: var(--navy); padding: 96px var(--side-pad);
+  display: flex; flex-direction: column; justify-content: center;
+}
 .bim-content .section-label { color: var(--accent); }
 .bim-content h2 { color: var(--white); margin-bottom: 20px; }
 .bim-content p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 14px; }
 .bim-list { list-style: none; margin: 28px 0 44px; }
 .bim-list li { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 14px; color: rgba(255,255,255,0.7); }
 .bim-list li::before { content: '—'; color: var(--accent); flex-shrink: 0; font-weight: 700; }
-.bim-visual-side { background: var(--navy-mid); padding: 80px 48px; display: flex; flex-direction: column; justify-content: space-between; border-left: 1px solid rgba(85,128,145,0.1); }
+.bim-visual-side { background: var(--navy-mid); padding: 80px clamp(40px, 4vw, 80px); display: flex; flex-direction: column; justify-content: space-between; border-left: 1px solid rgba(85,128,145,0.1); }
 .bim-big-num { font-family: var(--ffc); font-size: 88px; font-weight: 900; line-height: 1; margin-bottom: 6px; color: var(--accent); }
 .bim-big-lbl { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 .bim-divider { height: 1px; background: rgba(85,128,145,0.15); margin: 32px 0; }
@@ -207,7 +227,11 @@ h2 {
 
 /* PROCESSO */
 .process-bg { background: var(--off-white); }
-.process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.process-bg .section { padding: 104px var(--side-pad); }
+.process-steps {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  max-width: var(--max-width); margin: 0 auto;
+}
 .process-step { padding: 48px 36px; position: relative; border-right: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100); }
 .ps-num { font-family: var(--ffc); font-size: 80px; font-weight: 900; color: rgba(17,27,39,0.06); line-height: 1; position: absolute; top: 20px; right: 20px; }
 .ps-accent { width: 40px; height: 2px; background: var(--accent); margin-bottom: 24px; }
@@ -215,12 +239,12 @@ h2 {
 .process-step p { font-size: 13px; color: var(--gray-500); line-height: 1.7; }
 
 /* SOBRE */
-.about-wrap { display: grid; grid-template-columns: 1fr 1fr; }
-.about-content { padding: 96px 5%; display: flex; flex-direction: column; justify-content: center; }
+.about-wrap { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+.about-content { padding: 96px var(--side-pad); display: flex; flex-direction: column; justify-content: center; }
 .about-content h2 { margin-bottom: 20px; }
 .about-content p { font-size: 15px; color: var(--gray-500); line-height: 1.85; margin-bottom: 14px; }
 .about-quote { margin-top: 36px; padding: 24px 28px; border-left: 3px solid var(--accent); background: var(--off-white); font-family: var(--serif); font-size: 19px; color: var(--text); font-style: italic; line-height: 1.6; }
-.about-aside { background: var(--navy); padding: 96px 5%; display: flex; flex-direction: column; justify-content: center; }
+.about-aside { background: var(--navy); padding: 96px var(--side-pad); display: flex; flex-direction: column; justify-content: center; }
 .aside-item { margin-bottom: 40px; }
 .aside-val { font-family: var(--ffc); font-size: 60px; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: 4px; }
 .aside-lbl { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; text-transform: uppercase; }
@@ -228,7 +252,14 @@ h2 {
 .aside-logo { width: 130px; height: auto; mix-blend-mode: screen; filter: brightness(1.1); opacity: 0.8; }
 
 /* CTA */
-.cta-section { background: var(--accent); padding: 80px 5%; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+.cta-section {
+  background: var(--accent); padding: 80px var(--side-pad);
+  display: flex; align-items: center; justify-content: center;
+}
+.cta-inner {
+  max-width: var(--max-width); width: 100%; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center;
+}
 .cta-section h2 { color: var(--white); font-size: clamp(24px, 3.5vw, 40px); margin-bottom: 10px; }
 .cta-section p { color: rgba(255,255,255,0.8); font-size: 15px; line-height: 1.6; max-width: 520px; }
 .btn-dark { background: var(--navy); color: var(--white); white-space: nowrap; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 20px 40px; border-radius: 2px; text-decoration: none; transition: all 0.2s; }
@@ -236,7 +267,7 @@ h2 {
 
 /* CONTATO */
 .contact-bg { background: var(--off-white); }
-.contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: start; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: start; max-width: var(--max-width); margin: 0 auto; }
 .contact-info h2 { margin-bottom: 14px; }
 .contact-info .section-desc { margin-bottom: 48px; }
 .ci-item { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 28px; }
@@ -256,19 +287,20 @@ textarea { resize: vertical; min-height: 120px; }
 .form-submit:hover { background: var(--accent); color: var(--white); }
 
 /* FOOTER */
-footer { background: #0A1118; padding: 72px 5% 0; }
-.footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; }
+footer { background: #0A1118; padding: 72px var(--side-pad) 0; }
+.footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; max-width: var(--max-width); margin: 0 auto; }
 .footer-brand img { height: 64px; width: auto; margin-bottom: 20px; mix-blend-mode: screen; filter: brightness(1.1); }
 .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.8; max-width: 280px; }
 .footer-col h4 { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
 .footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none; margin-bottom: 12px; transition: color 0.2s; }
 .footer-col a:hover { color: var(--white); }
 .footer-col .fi { color: rgba(255,255,255,0.35); font-size: 13px; margin-bottom: 12px; line-height: 1.5; }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 0; display: flex; justify-content: space-between; align-items: center; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 0; display: flex; justify-content: space-between; align-items: center; max-width: var(--max-width); margin: 0 auto; }
 .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.2); }
 
 @media (max-width: 960px) {
   .bim-wrap, .about-wrap, .contact-grid { grid-template-columns: 1fr; }
+  .bim-content { max-width: 100%; }
   .bim-visual-side { padding: 48px 5%; }
   .cta-section { grid-template-columns: 1fr; gap: 32px; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
@@ -286,11 +318,12 @@ footer { background: #0A1118; padding: 72px 5% 0; }
     background: var(--white);
     border: 1px solid var(--gray-100);
     border-top: 3px solid var(--accent);
-    margin-bottom: 64px;
+    margin: 0 auto 64px;
     overflow: hidden;
+    max-width: var(--max-width);
   }
   .portfolio-header {
-    padding: 40px 44px 32px;
+    padding: 40px clamp(28px, 3vw, 44px) 32px;
     border-bottom: 1px solid var(--gray-100);
   }
   .portfolio-title-block { display: flex; gap: 28px; align-items: flex-start; }
@@ -313,14 +346,14 @@ footer { background: #0A1118; padding: 72px 5% 0; }
     border: 1px solid rgba(85,128,145,0.2);
     padding: 5px 12px; border-radius: 2px;
   }
-  .portfolio-images { padding: 32px 44px 40px; }
+  .portfolio-images { padding: 32px clamp(28px, 3vw, 44px) 40px; }
   .portfolio-img-main {
     width: 100%; margin-bottom: 16px; overflow: hidden;
     border: 1px solid var(--gray-100); position: relative;
     cursor: pointer;
   }
   .portfolio-img-main img {
-    width: 100%; height: 420px;
+    width: 100%; height: 320px;
     object-fit: cover; object-position: center;
     display: block; transition: transform 0.4s ease;
   }
@@ -331,7 +364,7 @@ footer { background: #0A1118; padding: 72px 5% 0; }
     position: relative; cursor: pointer;
   }
   .portfolio-img-item img {
-    width: 100%; height: 220px;
+    width: 100%; height: 180px;
     object-fit: cover; object-position: center;
     display: block; transition: transform 0.4s ease;
   }
@@ -424,6 +457,7 @@ footer { background: #0A1118; padding: 72px 5% 0; }
 
 <!-- DIFERENCIAIS -->
 <section id="diferenciais" class="section">
+  <div class="section-wrap">
   <div class="section-label">Por que HLC</div>
   <h2>Projetos que chegam à obra<br>prontos para executar.</h2>
   <p class="section-desc">A diferença está na precisão técnica e no uso inteligente do BIM para eliminar problemas antes que cheguem ao canteiro.</p>
@@ -433,10 +467,12 @@ footer { background: #0A1118; padding: 72px 5% 0; }
     <div class="diff-card"><span class="diff-num">03</span><h3>Quantitativos confiáveis</h3><p>Extraídos diretamente do modelo BIM. Sem planilhas manuais. Você orça com precisão e negocia com segurança.</p><div class="diff-bar"></div></div>
     <div class="diff-card"><span class="diff-num">04</span><h3>Comunicação e prazo claros</h3><p>Cronograma definido, entregas parciais e comunicação direta. Você sabe exatamente em que etapa está o projeto.</p><div class="diff-bar"></div></div>
   </div>
+  </div>
 </section>
 
 <!-- SERVIÇOS -->
 <section id="servicos" class="section services-bg">
+  <div class="section-wrap">
   <div class="section-label">Especialidades</div>
   <h2>Nossas disciplinas de projeto</h2>
   <p class="section-desc">Cobertura completa das instalações prediais em uma única fonte técnica responsável.</p>
@@ -448,83 +484,16 @@ footer { background: #0A1118; padding: 72px 5% 0; }
     <div class="service-card"><div class="service-num">05</div><h3>Detecção e Combate a Incêndio</h3><p>SPCI completo: hidrantes, sprinklers, detecção e alarme. Atendimento às exigências do Corpo de Bombeiros.</p></div>
     <div class="service-card"><div class="service-num">06</div><h3>Telecomunicações</h3><p>Cabeamento estruturado, TV, interfonia, CFTV e automação predial. Infraestrutura planejada para o futuro.</p></div>
   </div>
-</section>
-
-<!-- BIM -->
-<section id="bim">
-  <div class="bim-wrap">
-    <div class="bim-content">
-      <div class="section-label">Metodologia</div>
-      <h2 style="color:var(--white)">BIM não é diferencial.<br>É o nosso padrão.</h2>
-      <p>A maior parte dos problemas de obra começa no projeto. Conflitos entre instalações, quantitativos errados e documentação inconsistente geram aditivos que comprometem prazos e margens.</p>
-      <p>Na HLC, a metodologia BIM é a base de cada projeto entregue — não um serviço adicional.</p>
-      <ul class="bim-list">
-        <li>Modelo federado com todas as disciplinas compatibilizadas</li>
-        <li>Clash detection automático antes do início da obra</li>
-        <li>Quantitativos extraídos do modelo — zero margem de erro manual</li>
-        <li>Documentação 2D gerada diretamente do modelo 3D</li>
-        <li>Compatibilidade com Revit, Navisworks e IFC</li>
-      </ul>
-      <a href="https://wa.me/5531999851926?text=Quero%20saber%20mais%20sobre%20projetos%20BIM." class="btn-gold" target="_blank">Fale com um Engenheiro BIM</a>
-    </div>
-    <div class="bim-visual-side">
-      <div>
-        <div class="bim-big-num">LOD<br>350+</div>
-        <div class="bim-big-lbl">Level of Development</div>
-      </div>
-      <div class="bim-divider"></div>
-      <div>
-        <div class="bim-bar-block"><div class="bim-bar-head"><span>Interferências detectadas</span><span>Antes da obra</span></div><div class="bim-track"><div class="bim-fill" style="width:93%"></div></div></div>
-        <div class="bim-bar-block"><div class="bim-bar-head"><span>Compatibilização interdisciplinar</span><span>100%</span></div><div class="bim-track"><div class="bim-fill" style="width:100%"></div></div></div>
-        <div class="bim-bar-block"><div class="bim-bar-head"><span>Precisão de quantitativos</span><span>↑60%</span></div><div class="bim-track"><div class="bim-fill" style="width:82%"></div></div></div>
-        <div class="bim-bar-block"><div class="bim-bar-head"><span>Redução de retrabalho em obra</span><span>↓40%</span></div><div class="bim-track"><div class="bim-fill" style="width:70%"></div></div></div>
-      </div>
-    </div>
   </div>
 </section>
-
-<!-- PROCESSO -->
-<section id="processo" class="section process-bg">
-  <div class="section-label">Como Trabalhamos</div>
-  <h2>Do briefing à entrega.<br>Sem gaps.</h2>
-  <p class="section-desc">Transparência em cada etapa. Você acompanha o projeto em tempo real.</p>
-  <div class="process-steps">
-    <div class="process-step"><div class="ps-num">01</div><div class="ps-accent"></div><h3>Briefing e Análise</h3><p>Levantamento das necessidades técnicas, normas aplicáveis e interferências com outras disciplinas do empreendimento.</p></div>
-    <div class="process-step"><div class="ps-num">02</div><div class="ps-accent"></div><h3>Modelagem BIM</h3><p>Desenvolvimento do modelo 3D com todas as instalações, já compatibilizado com arquitetura e estrutura.</p></div>
-    <div class="process-step"><div class="ps-num">03</div><div class="ps-accent"></div><h3>Compatibilização</h3><p>Clash detection, revisão técnica e ajustes. Eliminamos interferências antes que se tornem problemas de obra.</p></div>
-    <div class="process-step"><div class="ps-num">04</div><div class="ps-accent"></div><h3>Entrega e Suporte</h3><p>Pranchas 2D, modelo BIM, memoriais de cálculo, quantitativos e suporte durante a execução da obra.</p></div>
-  </div>
-</section>
-
-<!-- SOBRE -->
-<section id="sobre">
-  <div class="about-wrap">
-    <div class="about-content">
-      <div class="section-label">Quem Somos</div>
-      <h2>Engenharia séria.<br>Tecnologia na medida certa.</h2>
-      <p>A HLC Engenharia nasceu da convicção de que um bom projeto predial não precisa custar mais — precisa ser feito melhor.</p>
-      <p>Combinamos sólida formação técnica em instalações prediais com domínio real da metodologia BIM para entregar projetos sem inconsistências, sem conflitos escondidos e sem surpresas no orçamento.</p>
-      <p>Nosso compromisso é com a excelência técnica e com uma relação transparente com cada cliente, do primeiro contato à obra entregue.</p>
-      <div class="about-quote">"Projetar bem não é luxo. É a única forma responsável de construir."</div>
-    </div>
-    <div class="about-aside">
-      <div class="aside-item"><div class="aside-val">BIM</div><div class="aside-lbl">Metodologia nativa em todos os projetos</div></div>
-      <div class="aside-sep"></div>
-      <div class="aside-item"><div class="aside-val" style="font-size:44px;color:var(--accent-light)">6</div><div class="aside-lbl">Especialidades de instalações prediais</div></div>
-      <div class="aside-sep"></div>
-      <div class="aside-item"><div class="aside-val" style="font-size:44px;color:var(--accent-light)">BH</div><div class="aside-lbl">Belo Horizonte — Minas Gerais</div></div>
-      <div class="aside-sep"></div>
-      <img src="data:image/png;base64,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" alt="HLC Engenharia" class="aside-logo">
-    </div>
-  </div>
-</section>
-
 
 <!-- PORTFÓLIO -->
 <section id="portfolio" class="section portfolio-bg">
+  <div class="section-wrap">
   <div class="section-label">Portfólio</div>
   <h2>Projetos Desenvolvidos</h2>
   <p class="section-desc">Conheça alguns dos projetos entregues pela HLC Engenharia com metodologia BIM.</p>
+  </div>
 
   <!-- PROJETO 01: CASA MY -->
   <div class="portfolio-project">
@@ -692,17 +661,92 @@ document.addEventListener('keydown', function(e) {
 });
 </script>
 
+<!-- BIM -->
+<section id="bim">
+  <div class="bim-wrap">
+    <div class="bim-content">
+      <div class="section-label">Metodologia</div>
+      <h2 style="color:var(--white)">BIM não é diferencial.<br>É o nosso padrão.</h2>
+      <p>A maior parte dos problemas de obra começa no projeto. Conflitos entre instalações, quantitativos errados e documentação inconsistente geram aditivos que comprometem prazos e margens.</p>
+      <p>Na HLC, a metodologia BIM é a base de cada projeto entregue — não um serviço adicional.</p>
+      <ul class="bim-list">
+        <li>Modelo federado com todas as disciplinas compatibilizadas</li>
+        <li>Clash detection automático antes do início da obra</li>
+        <li>Quantitativos extraídos do modelo — zero margem de erro manual</li>
+        <li>Documentação 2D gerada diretamente do modelo 3D</li>
+        <li>Compatibilidade com Revit, Navisworks e IFC</li>
+      </ul>
+      <a href="https://wa.me/5531999851926?text=Quero%20saber%20mais%20sobre%20projetos%20BIM." class="btn-gold" target="_blank">Fale com um Engenheiro BIM</a>
+    </div>
+    <div class="bim-visual-side">
+      <div>
+        <div class="bim-big-num">LOD<br>350+</div>
+        <div class="bim-big-lbl">Level of Development</div>
+      </div>
+      <div class="bim-divider"></div>
+      <div>
+        <div class="bim-bar-block"><div class="bim-bar-head"><span>Interferências detectadas</span><span>Antes da obra</span></div><div class="bim-track"><div class="bim-fill" style="width:93%"></div></div></div>
+        <div class="bim-bar-block"><div class="bim-bar-head"><span>Compatibilização interdisciplinar</span><span>100%</span></div><div class="bim-track"><div class="bim-fill" style="width:100%"></div></div></div>
+        <div class="bim-bar-block"><div class="bim-bar-head"><span>Precisão de quantitativos</span><span>↑60%</span></div><div class="bim-track"><div class="bim-fill" style="width:82%"></div></div></div>
+        <div class="bim-bar-block"><div class="bim-bar-head"><span>Redução de retrabalho em obra</span><span>↓40%</span></div><div class="bim-track"><div class="bim-fill" style="width:70%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo" class="section process-bg">
+  <div class="section-wrap">
+  <div class="section-label">Como Trabalhamos</div>
+  <h2>Do briefing à entrega.<br>Sem gaps.</h2>
+  <p class="section-desc">Transparência em cada etapa. Você acompanha o projeto em tempo real.</p>
+  <div class="process-steps">
+    <div class="process-step"><div class="ps-num">01</div><div class="ps-accent"></div><h3>Briefing e Análise</h3><p>Levantamento das necessidades técnicas, normas aplicáveis e interferências com outras disciplinas do empreendimento.</p></div>
+    <div class="process-step"><div class="ps-num">02</div><div class="ps-accent"></div><h3>Modelagem BIM</h3><p>Desenvolvimento do modelo 3D com todas as instalações, já compatibilizado com arquitetura e estrutura.</p></div>
+    <div class="process-step"><div class="ps-num">03</div><div class="ps-accent"></div><h3>Compatibilização</h3><p>Clash detection, revisão técnica e ajustes. Eliminamos interferências antes que se tornem problemas de obra.</p></div>
+    <div class="process-step"><div class="ps-num">04</div><div class="ps-accent"></div><h3>Entrega e Suporte</h3><p>Pranchas 2D, modelo BIM, memoriais de cálculo, quantitativos e suporte durante a execução da obra.</p></div>
+  </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="about-wrap">
+    <div class="about-content">
+      <div class="section-label">Quem Somos</div>
+      <h2>Engenharia séria.<br>Tecnologia na medida certa.</h2>
+      <p>A HLC Engenharia nasceu da convicção de que um bom projeto predial não precisa custar mais — precisa ser feito melhor.</p>
+      <p>Combinamos sólida formação técnica em instalações prediais com domínio real da metodologia BIM para entregar projetos sem inconsistências, sem conflitos escondidos e sem surpresas no orçamento.</p>
+      <p>Nosso compromisso é com a excelência técnica e com uma relação transparente com cada cliente, do primeiro contato à obra entregue. Atendemos projetos em todo o Brasil.</p>
+      <div class="about-quote">"Projetar bem não é luxo. É a única forma responsável de construir."</div>
+    </div>
+    <div class="about-aside">
+      <div class="aside-item"><div class="aside-val">BIM</div><div class="aside-lbl">Metodologia nativa em todos os projetos</div></div>
+      <div class="aside-sep"></div>
+      <div class="aside-item"><div class="aside-val" style="font-size:44px;color:var(--accent-light)">6</div><div class="aside-lbl">Especialidades de instalações prediais</div></div>
+      <div class="aside-sep"></div>
+      <div class="aside-item"><div class="aside-val" style="font-size:44px;color:var(--accent-light)">BH</div><div class="aside-lbl">Belo Horizonte — Minas Gerais</div></div>
+      <div class="aside-sep"></div>
+      <img src="data:image/png;base64,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" alt="HLC Engenharia" class="aside-logo">
+    </div>
+  </div>
+</section>
+
+
 <!-- CTA -->
 <section class="cta-section">
-  <div>
-    <h2>Pronto para um projeto sem retrabalho?</h2>
-    <p>Fale com a gente e receba um diagnóstico gratuito. Veja o que a metodologia BIM pode fazer pelo seu próximo empreendimento.</p>
+  <div class="cta-inner">
+    <div>
+      <h2>Pronto para um projeto sem retrabalho?</h2>
+      <p>Fale com a gente e receba um diagnóstico gratuito. Veja o que a metodologia BIM pode fazer pelo seu próximo empreendimento.</p>
+    </div>
+    <a href="https://wa.me/5531999851926?text=Olá!%20Gostaria%20de%20um%20diagnóstico%20gratuito%20para%20meu%20projeto." class="btn-dark" target="_blank">Solicitar Diagnóstico Gratuito →</a>
   </div>
-  <a href="https://wa.me/5531999851926?text=Olá!%20Gostaria%20de%20um%20diagnóstico%20gratuito%20para%20meu%20projeto." class="btn-dark" target="_blank">Solicitar Diagnóstico Gratuito →</a>
 </section>
 
 <!-- CONTATO -->
 <section id="contato" class="section contact-bg">
+  <div class="section-wrap">
   <div class="contact-grid">
     <div class="contact-info">
       <div class="section-label">Contato</div>
@@ -736,6 +780,7 @@ document.addEventListener('keydown', function(e) {
       <div class="form-row"><label>Descreva o projeto</label><textarea placeholder="Área aproximada, localização, fase do projeto, urgência..."></textarea></div>
       <button class="form-submit" onclick="window.open('https://wa.me/5531999851926?text=Olá!%20Preenchi%20o%20formulário%20do%20site%20e%20gostaria%20de%20solicitar%20uma%20proposta%20da%20HLC%20Engenharia.','_blank')">Enviar pelo WhatsApp →</button>
     </div>
+  </div>
   </div>
 </section>
 
